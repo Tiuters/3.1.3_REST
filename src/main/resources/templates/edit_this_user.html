@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">-->
+<!--<html lang="en">-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="UTF-8">
+        <title>Updating user</title>
+    </head>
+    <body>
+        <form  th:method="PUT" th:action="@{/admin/updated_user}" th:object="${user}">
+            <input type="hidden" th:field="*{id}" id="id" value="*{id}">
+            <input type="text" th:field="*{name}" id="name">
+            <label for="name">Name</label>
+            <br><br>
+            <input type="text" th:field="*{lastName}" id="lastName">
+            <label for="lastName">Last name</label>
+            <br><br>
+            <input type="text" th:field="*{post}" id="post">
+            <label for="post">Post</label>
+            <br><br>
+            <input type="text" th:field="*{username}" id="username">
+            <label for="username">Username</label>
+            <br><br>
+            <input type="text" th:field="*{password}" id="password">
+            <label for="password">Password</label>
+            <br>
+            <p>Current roles: <span th:utext="${user.getRolesAsString()}"></span></p>
+            <br>
+<!--            <input type="checkbox" name="checkBox" value="ROLE_USER">User</input><br>-->
+<!--            <input type="checkbox" name="checkBox" value="ROLE_ADMIN">Admin</input>-->
+
+            <label for="roles">Set roles</label>
+            <select id="roles" th:field="*{roles}" size="2" multiple="multiple">
+                <option th:each="role : ${roles}"
+                        th:value="${role.getId()}"
+                        th:text="${role.role}"></option>
+            </select>
+
+<!--            <tr th:each="role : ${listRoles}">-->
+<!--                <td th:text="${role}"></td>-->
+            <br><br>
+
+            <input type="submit" value="Edit user">
+        </form>
+        <p>
+        <form  th:action="@{/admin/give_me_them_all}">
+            <button>To all users</button>
+        </form>
+        <a href="/logout">Logout</a>
+        </p>
+    </body>
+</html>
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Updating user</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<form th:action="@{/updated_user}" th:object="${user}"-->
+<!--      method="post" style="max-width: 600px; margin: 0 auto;">-->
+<!--    <input type="hidden" th:field="*{id}" />-->
+<!--    <div class="m-3">-->
+<!--        <div class="form-group row">-->
+<!--            <label class="col-4 col-form-label">Name: </label>-->
+<!--            <div class="col-8">-->
+<!--                <input type="name" th:field="*{name}" class="form-control" required />-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-group row">-->
+<!--            <label class="col-4 col-form-label">Last Name: </label>-->
+<!--            <div class="col-8">-->
+<!--                <input type="text" th:field="*{lastName}" class="form-control"-->
+<!--                       required minlength="6" maxlength="10"/>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-group row">-->
+<!--            <label class="col-4 col-form-label">Post: </label>-->
+<!--            <div class="col-8">-->
+<!--                <input type="text" th:field="*{post}" class="form-control"-->
+<!--                       required minlength="2" maxlength="20"/>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-group row">-->
+<!--            <label class="col-4 col-form-label">Username: </label>-->
+<!--            <div class="col-8">-->
+<!--                <input type="text" th:field="*{username}" class="form-control"-->
+<!--                       required minlength="2" maxlength="20" />-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-group row">-->
+<!--            <label class="col-4 col-form-label">Password: </label>-->
+<!--            <div class="col-8">-->
+<!--                <input type="text" th:field="*{password}" class="form-control"-->
+<!--                       required minlength="2" maxlength="20" />-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-group row">-->
+<!--            <label class="col-4 col-form-label">Roles: </label>-->
+<!--            <div class="col-8">-->
+<!--                <th:block th:each="role: ${listRoles}">-->
+<!--                    <input type="checkbox" th:field="*{roles}"-->
+<!--                           th:text="${role}" th:value="${role}" class="m-2" />-->
+<!--                </th:block>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div>-->
+<!--            <button type="submit" class="btn btn-primary">Update</button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</form>-->
+<!--<p>-->
+<!--<form style="text-align: center" th:action="@{/all_users_fall_in}">-->
+<!--    <button>To all users</button>-->
+<!--</form>-->
+<!--</p>-->
+<!--</body>-->
+<!--</html>-->

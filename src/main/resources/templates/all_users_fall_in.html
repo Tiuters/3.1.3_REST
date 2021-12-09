@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">-->
+<!--<html lang="en">-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>All users</title>
+<!--    <style> table th, table td {padding: 5px;}</style>-->
+    <style type="text/css">
+        table {
+            width: 500px; /* Ширина таблицы */
+            border: black 1px solid; /* Стиль рамки таблицы */
+            border-spacing: 0; /* Расстояние между ячейками */
+            border-collapse: collapse; /* Одинарная рамка */
+            margin: 0 auto 0 auto /* Выравнивание таблицы по центру */
+        }
+        td, th {
+            border: black 1px solid; /* Стиль рамки ячеек */
+            padding: 10px; /* Отступ между границей и содержимым */
+            text-align: center /* Выравнивание ячейки по центру */
+        }
+        tr {
+            text-align: center; /* Горизонтальное выравнивание */
+            vertical-align: top; /* Вертикальное выравнивание */
+        }
+        tr:nth-child(2n) {
+            background: #e8e8e8 /* Зебра */
+        }
+        thead, tfoot {
+            background: #f5e0cd /* Цвет фона */
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h2 style="text-align: center">All Users</h2>
+    <table border="3">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Last name</th>
+            <th>Post</th>
+            <th>Username</th>
+            <th>Roles</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+            <td th:text="${user.getId()}"></td>
+            <td th:text="${user.getName()}"></td>
+            <td th:text="${user.getLastName()}"></td>
+            <td th:text="${user.getPost()}"></td>
+            <td th:text="${user.getUsername()}"></td>
+            <td th:text="${user.getRolesAsString()}"></td>
+
+            <td>
+                <form th:action="@{admin/get_user_to_edit/{id}(id=${user.getId()})}">
+                    <button>Edit</button>
+                </form>
+            </td>
+
+            <td>
+                <form th:method="DELETE" th:action="@{/admin/delete_user/{id}(id=${user.getId()})}">
+                    <input type="submit" value="delete"/>
+                </form>
+            </td>
+
+            </tr>
+        </tbody>
+    </table>
+    <p>
+    <form style="text-align: center" th:action="@{/admin/make_new_empty/}">
+        <button>Make new!</button>
+        <a href="/logout">Logout</a>
+    </form>
+<!--    <br/><br/>-->
+<!--    <a href="/user">Admin's personal page</a>-->
+    </p>
+</div>
+</body>
+</html>
