@@ -40,15 +40,15 @@ public class AdminController {
 
     @PutMapping("/updated_user")
     public String editUser(@ModelAttribute("user") User user,
-                           @RequestParam(value = "roles", required = false) List<Long> roles) {
+                           @RequestParam(value = "roles") List<Long> roles) {
         if (roles == null) {
             return "/empty_checkboxes";
         }
-        Set<Role> set = new HashSet<>();
+        Set<Role> set1 = new HashSet<>();
         for (Long id : roles) {
-            set.add(roleService.getRoleById(id));
+            set1.add(roleService.getRoleById(id));
         }
-        user.setRoles(set);
+        user.setRoles(set1);
         userService.editUser(user);
         return "redirect:/admin";
     }

@@ -1,39 +1,39 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>All users</title>
+    <link href="/static/styles.css" rel="stylesheet" type="text/css" th:href="@{/styles.css}">
     <!--    <style> table th, table td {padding: 5px;}</style>-->
-    <style type="text/css">
-        table {
-            width: 500px; /* Ширина таблицы */
-            border: black 1px solid; /* Стиль рамки таблицы */
-            border-spacing: 0; /* Расстояние между ячейками */
-            border-collapse: collapse; /* Одинарная рамка */
-            margin: 0 auto 0 auto /* Выравнивание таблицы по центру */
-        }
-        td, th {
-            border: black 1px solid; /* Стиль рамки ячеек */
-            padding: 10px; /* Отступ между границей и содержимым */
-            text-align: center /* Выравнивание ячейки по центру */
-        }
-        tr {
-            text-align: center; /* Горизонтальное выравнивание */
-            vertical-align: top; /* Вертикальное выравнивание */
-        }
-        tr:nth-child(2n) {
-            background: #e8e8e8 /* Зебра */
-        }
-        thead, tfoot {
-            background: #f5e0cd /* Цвет фона */
-        }
-    </style>
+<!--    <style type="text/css">-->
+<!--        table {-->
+<!--            width: 500px; /* Ширина таблицы */-->
+<!--            border: black 1px solid; /* Стиль рамки таблицы */-->
+<!--            border-spacing: 0; /* Расстояние между ячейками */-->
+<!--            border-collapse: collapse; /* Одинарная рамка */-->
+<!--            margin: 0 auto 0 auto /* Выравнивание таблицы по центру */-->
+<!--        }-->
+<!--        td, th {-->
+<!--            border: black 1px solid; /* Стиль рамки ячеек */-->
+<!--            padding: 10px; /* Отступ между границей и содержимым */-->
+<!--            text-align: center /* Выравнивание ячейки по центру */-->
+<!--        }-->
+<!--        tr {-->
+<!--            text-align: center; /* Горизонтальное выравнивание */-->
+<!--            vertical-align: top; /* Вертикальное выравнивание */-->
+<!--        }-->
+<!--        tr:nth-child(2n) {-->
+<!--            background: #e8e8e8 /* Зебра */-->
+<!--        }-->
+<!--        thead, tfoot {-->
+<!--            background: #f5e0cd /* Цвет фона */-->
+<!--        }-->
+<!--    </style>-->
 </head>
 <body>
 <div>
-    <h2 style="text-align: center">User's details</h2>
-    <table border="3">
+    <h2 >User's details</h2>
+    <table class="user-table">
         <thead>
         <tr>
             <th>id</th>
@@ -56,5 +56,9 @@
         </tbody>
     </table>
 </div>
+<br><br>
+<form th:action="@{/logout}">
+    <button>Logout</button>
+</form>
 </body>
 </html>
