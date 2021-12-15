@@ -1,7 +1,6 @@
-package kata.boot.config;
+package kata.boot.service;
 
 import kata.boot.entity.User;
-import kata.boot.service.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

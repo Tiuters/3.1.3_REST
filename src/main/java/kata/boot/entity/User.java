@@ -160,6 +160,6 @@ StringBuilder sb = new StringBuilder();
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, lastName, post, username, password);
+        return Objects.hash(name, lastName, post, username, password);
     }
 }
