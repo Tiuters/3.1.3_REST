@@ -44,12 +44,13 @@ public class AdminController {
         if (roles == null) {
             return "/empty_checkboxes";
         }
-        Set<Role> set1 = new HashSet<>();
-        for (Long id : roles) {
-            set1.add(roleService.getRoleById(id));
-        }
-        user.setRoles(set1);
-        userService.editUser(user);
+//        Set<Role> set1 = new HashSet<>();
+//        for (Long id : roles) {
+//            set1.add(roleService.getRoleById(id));
+//        }
+//        user.setRoles(set1);
+//        userService.editUser(user)
+        userService.userAndRolesFromController(user, roles);
         return "redirect:/admin";
     }
 
@@ -71,13 +72,13 @@ public class AdminController {
         if (roles == null) {
             return "/empty_checkboxes";
         }
-        Set<Role> set2 = new HashSet<>();
-        for (Long id : roles) {
-            set2.add(roleService.getRoleById(id));
-        }
-        user.setRoles(set2);
-
-        userService.newUser(user);
+//        Set<Role> set2 = new HashSet<>();
+//        for (Long id : roles) {
+//            set2.add(roleService.getRoleById(id));
+//        }
+//        user.setRoles(set2);
+//        userService.newUser(user);
+        userService.userAndRolesFromController(user, roles);
         return "redirect:/admin";
     }
 }

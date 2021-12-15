@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class RoleServiceImp implements RoleService{
     private final RoleRepository roleRepository;
 

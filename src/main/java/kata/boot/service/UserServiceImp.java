@@ -9,9 +9,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
+@Transactional
 public class UserServiceImp implements UserService {
 
     private final UserRepository userRepository;
@@ -39,16 +42,21 @@ public class UserServiceImp implements UserService {
         return userRepository.getById(id);
     }
 
-    @Override
-    @Transactional
-    public void newUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-    }
+//    @Override
+//    @Transactional
+//    public void newUser(User user) {
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        userRepository.save(user);
+//    }
 
     @Override
     @Transactional
-    public void editUser(User user) {
+    public void createOrEditUser(User user) {
+        if (user.getId() == null) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
+            return;
+        }
         if(!user.getPassword().equals(showUser(user.getId()).getPassword())) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
@@ -68,6 +76,17 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public void userAndRolesFromController(User user, List<Long> roles) {
+       Set<Role> set = new HashSet<>();
+        for (Long id : roles) {
+            set.add(roleService.getRoleById(id));
+        }
+        user.setRoles(set);
+//        newUser(user);
+        createOrEditUser(user);
+    }
+
+    @Override
     public void createStartUpUsers() {
 
         User admin = new User("Bob", "Sec", "god",
@@ -82,14 +101,16 @@ public class UserServiceImp implements UserService {
         roleService.saveRole(roleAdmin);
         roleService.saveRole(roleUser);
 
-        newUser(admin);
+        createOrEditUser(admin);
         admin.addRoleToUser(roleAdmin);
         admin.addRoleToUser(roleUser);
 
-        newUser(user);
+        createOrEditUser(user);
         user.addRoleToUser(roleUser);
 
-        newUser(kim);
+        createOrEditUser(kim);
         kim.addRoleToUser(roleUser);
     }
+
+
 }
