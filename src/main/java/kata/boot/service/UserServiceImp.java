@@ -89,11 +89,11 @@ public class UserServiceImp implements UserService {
     @Override
     public void createStartUpUsers() {
 
-        User admin = new User("Bob", "Sec", "god",
+        User admin1 = new User("Bob", "Sec", "god",
             "admin", "111");
-        User user = new User("Chin", "Drake", "puser",
+        User user1 = new User("Chin", "Drake", "puser",
             "user", "222");
-        User kim = new User("Kim", "Komintern", "boss",
+        User user2 = new User("Kim", "Komintern", "boss",
             "kim", "333");
 
         Role roleAdmin = new Role("ROLE_ADMIN");
@@ -101,15 +101,15 @@ public class UserServiceImp implements UserService {
         roleService.saveRole(roleAdmin);
         roleService.saveRole(roleUser);
 
-        createOrEditUser(admin);
-        admin.addRoleToUser(roleAdmin);
-        admin.addRoleToUser(roleUser);
+        createOrEditUser(admin1);
+        admin1.addRoleToUser(roleAdmin);
+        admin1.addRoleToUser(roleUser);
 
-        createOrEditUser(user);
-        user.addRoleToUser(roleUser);
+        createOrEditUser(user1);
+        user1.addRoleToUser(roleUser);
 
-        createOrEditUser(kim);
-        kim.addRoleToUser(roleUser);
+        createOrEditUser(user2);
+        user2.addRoleToUser(roleUser);
     }
 
 

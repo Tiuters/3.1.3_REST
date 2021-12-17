@@ -5,7 +5,9 @@ import kata.boot.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -35,8 +37,16 @@ public class RoleServiceImp implements RoleService{
     }
 
 //    @Override
+//    public Set<Role> stringToSet(String[] role){
+//        Set<Role> set = new HashSet<>();
+//        for (String roles : role) {
+//            set.add(getRoleByName(roles));
+//        }
+//        return set;
+//    }
+
+//    @Override
 //    public Role getRoleByName(String roleName) {
-////        return roleRepository.getRoleByName(roleName);
 //        return roleRepository.getRoleByName(roleName);
 //    }
 

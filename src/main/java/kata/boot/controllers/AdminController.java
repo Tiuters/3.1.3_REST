@@ -4,6 +4,7 @@ import kata.boot.entity.Role;
 import kata.boot.entity.User;
 import kata.boot.service.RoleService;
 import kata.boot.service.UserService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,35 +25,75 @@ public class AdminController {
     }
 
     @GetMapping
-    public String showAllUsers(Model model) {
-        model.addAttribute("users", userService.showAllUsers());
-        return "/all_users_fall_in";
-    }
-
-    @GetMapping("/get_user_to_edit/{id}")
-    public String userToBeEdited(@PathVariable("id") Long id, Model model) {
-        User user = userService.showUser(id);
-        List<Role> roles = roleService.getAllRoles();
+    public String showAllUsers(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("user", user);
-        model.addAttribute("roles", roles);
-        return "/edit_this_user";
+        model.addAttribute("allUsers", userService.showAllUsers());
+        model.addAttribute("allRoles", roleService.getAllRoles());
+        return "admin2";
     }
 
-    @PutMapping("/updated_user")
-    public String editUser(@ModelAttribute("user") User user,
-                           @RequestParam(value = "roles") List<Long> roles) {
+    @PostMapping("/new_user")
+    public String newUser(@ModelAttribute("user") User user,
+                          @RequestParam(value = "roles", required = false) List<Long> roles) {
         if (roles == null) {
             return "/empty_checkboxes";
         }
+        userService.userAndRolesFromController(user, roles);
+        return "redirect:/admin2";
+    }
+
+//    @PutMapping("/updated_user")
+//    public String editUser(@ModelAttribute("user") User user,
+//                           @RequestParam(value = "roles") String[] roles) {
+//        if (roles == null) {
+//            return "/empty_checkboxes";
+//        }
+//        user.setRoles(roleService.stringToSet(roles));
+//        userService.createOrEditUser(user);
+//        return "redirect:/admin2";
+//    }
+
+
+
+
+
+
+
+
+
+
+
+
+//    @GetMapping
+//    public String showAllUsers(Model model) {
+//        model.addAttribute("users", userService.showAllUsers());
+//        return "/all_users_fall_in";
+//    }
+
+//    @GetMapping("/get_user_to_edit/{id}")
+//    public String userToBeEdited(@PathVariable("id") Long id, Model model) {
+//        User user = userService.showUser(id);
+//        List<Role> roles = roleService.getAllRoles();
+//        model.addAttribute("user", user);
+//        model.addAttribute("roles", roles);
+//        return "/edit_this_user";
+//    }
+
+//    @PutMapping("/updated_user")
+//    public String editUser(@ModelAttribute("user") User user,
+//                           @RequestParam(value = "roles") List<Long> roles) {
+//        if (roles == null) {
+//            return "/empty_checkboxes";
+//        }
 //        Set<Role> set1 = new HashSet<>();
 //        for (Long id : roles) {
 //            set1.add(roleService.getRoleById(id));
 //        }
 //        user.setRoles(set1);
 //        userService.editUser(user)
-        userService.userAndRolesFromController(user, roles);
-        return "redirect:/admin";
-    }
+//        userService.userAndRolesFromController(user, roles);
+//        return "redirect:/admin";
+//    }
 
     @DeleteMapping("/delete_user/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
@@ -66,21 +107,21 @@ public class AdminController {
         return "/empty_to_fill_in";
     }
 
-    @PostMapping("/brand_new_user")
-    public String newUser(@ModelAttribute("user") User user,
-                          @RequestParam(value = "roles", required = false) List<Long> roles) {
-        if (roles == null) {
-            return "/empty_checkboxes";
-        }
-//        Set<Role> set2 = new HashSet<>();
-//        for (Long id : roles) {
-//            set2.add(roleService.getRoleById(id));
+//    @PostMapping("/brand_new_user")
+//    public String newUser(@ModelAttribute("user") User user,
+//                          @RequestParam(value = "roles", required = false) List<Long> roles) {
+//        if (roles == null) {
+//            return "/empty_checkboxes";
 //        }
-//        user.setRoles(set2);
-//        userService.newUser(user);
-        userService.userAndRolesFromController(user, roles);
-        return "redirect:/admin";
-    }
+////        Set<Role> set2 = new HashSet<>();
+////        for (Long id : roles) {
+////            set2.add(roleService.getRoleById(id));
+////        }
+////        user.setRoles(set2);
+////        userService.newUser(user);
+//        userService.userAndRolesFromController(user, roles);
+//        return "redirect:/admin";
+//    }
 }
 
 
