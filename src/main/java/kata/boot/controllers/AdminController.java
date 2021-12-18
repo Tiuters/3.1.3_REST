@@ -42,7 +42,7 @@ public class AdminController {
         return "redirect:/admin2";
     }
 
-//    @PutMapping("/updated_user")
+//    @PostMapping("/updated_user/{id}")
 //    public String editUser(@ModelAttribute("user") User user,
 //                           @RequestParam(value = "roles") String[] roles) {
 //        if (roles == null) {
@@ -52,6 +52,17 @@ public class AdminController {
 //        userService.createOrEditUser(user);
 //        return "redirect:/admin2";
 //    }
+
+    @PutMapping("/updated_user")
+    public String editUser(@ModelAttribute("user") User user,
+                           @RequestParam(value = "roles") String[] roles) {
+        if (roles == null) {
+            return "/empty_checkboxes";
+        }
+        user.setRoles(roleService.stringToSet(roles));
+        userService.createOrEditUser(user);
+        return "redirect:/admin2";
+    }
 
 
 

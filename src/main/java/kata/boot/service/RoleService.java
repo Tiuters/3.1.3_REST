@@ -10,5 +10,5 @@ public interface RoleService {
     void saveRole(Role role);
     List<Role> getAllRoles();
     Role getRoleById(Long id);
-//    Set<Role> stringToSet(String[] role);
+    Set<Role> stringToSet(String[] role);
 }
