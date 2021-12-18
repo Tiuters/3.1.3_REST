@@ -26,9 +26,12 @@ public class AdminController {
 
     @GetMapping
     public String showAllUsers(Model model, @AuthenticationPrincipal User user) {
+//    public String showAllUsers(Model model) {
+//        User user = new User();
+//
         model.addAttribute("user", user);
-        model.addAttribute("allUsers", userService.showAllUsers());
-        model.addAttribute("allRoles", roleService.getAllRoles());
+        model.addAttribute("users", userService.showAllUsers());
+        model.addAttribute("roles", roleService.getAllRoles());
         return "admin2";
     }
 
@@ -39,7 +42,7 @@ public class AdminController {
             return "/empty_checkboxes";
         }
         userService.userAndRolesFromController(user, roles);
-        return "redirect:/admin2";
+        return "redirect:/admin";
     }
 
 //    @PostMapping("/updated_user/{id}")
@@ -53,18 +56,32 @@ public class AdminController {
 //        return "redirect:/admin2";
 //    }
 
+//    @PutMapping("/updated_user")
+//    public String editUser(@ModelAttribute("user") User user,
+//                           @RequestParam(value = "roles") Role[] roles) {
+//        if (roles == null) {
+//            return "/empty_checkboxes";
+//        }
+////        user.setRoles(roleService.stringToSet(roles));
+//        userService.createOrEditUser(user);
+//        return "redirect:/admin2";
+//    }
+
     @PutMapping("/updated_user")
     public String editUser(@ModelAttribute("user") User user,
-                           @RequestParam(value = "roles") String[] roles) {
+                           @RequestParam(value = "roles") List<Long> roles) {
         if (roles == null) {
             return "/empty_checkboxes";
         }
-        user.setRoles(roleService.stringToSet(roles));
-        userService.createOrEditUser(user);
-        return "redirect:/admin2";
+        userService.userAndRolesFromController(user, roles);
+        return "redirect:/admin";
     }
 
-
+    @DeleteMapping("/delete_user/{id}")
+    public String deleteUser(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
+        return "redirect:/admin";
+    }
 
 
 
@@ -106,11 +123,11 @@ public class AdminController {
 //        return "redirect:/admin";
 //    }
 
-    @DeleteMapping("/delete_user/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
-        userService.deleteUser(id);
-        return "redirect:/admin";
-    }
+//    @DeleteMapping("/delete_user/{id}")
+//    public String deleteUser(@PathVariable("id") Long id) {
+//        userService.deleteUser(id);
+//        return "redirect:/admin";
+//    }
 
     @GetMapping("/make_new_empty")
     public String emptyUser(@ModelAttribute("user") User user, Model model) {
