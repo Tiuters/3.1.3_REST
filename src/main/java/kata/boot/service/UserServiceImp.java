@@ -42,15 +42,7 @@ public class UserServiceImp implements UserService {
         return userRepository.getById(id);
     }
 
-//    @Override
-//    @Transactional
-//    public void newUser(User user) {
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        userRepository.save(user);
-//    }
-
     @Override
-    @Transactional
     public void createOrEditUser(User user) {
         if (user.getId() == null) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -64,7 +56,6 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    @Transactional
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
@@ -82,7 +73,6 @@ public class UserServiceImp implements UserService {
             set.add(roleService.getRoleById(id));
         }
         user.setRoles(set);
-//        newUser(user);
         createOrEditUser(user);
     }
 

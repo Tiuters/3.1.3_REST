@@ -33,9 +33,3 @@ public class UserController {
 }
 
 
-
-
-//        SecurityContext context = SecurityContextHolder.getContext();
-//        Authentication authentication = context.getAuthentication();
-//        User principal = (User) authentication.getPrincipal();
-

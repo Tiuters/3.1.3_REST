@@ -1,6 +1,5 @@
 package kata.boot.controllers;
 
-import kata.boot.entity.Role;
 import kata.boot.entity.User;
 import kata.boot.service.RoleService;
 import kata.boot.service.UserService;
@@ -9,9 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -26,22 +23,29 @@ public class AdminController {
 
     @GetMapping
     public String showAllUsers(Model model, @AuthenticationPrincipal User user) {
-//    public String showAllUsers(Model model) {
-//        User user = new User();
-//
         model.addAttribute("user", user);
         model.addAttribute("users", userService.showAllUsers());
         model.addAttribute("roles", roleService.getAllRoles());
-        return "admin2";
+        return "admin";
     }
 
     @PostMapping("/new_user")
     public String newUser(@ModelAttribute("user") User user,
-                          @RequestParam(value = "roles", required = false) List<Long> roles) {
-        if (roles == null) {
-            return "/empty_checkboxes";
-        }
+                          @RequestParam(value = "roles") List<Long> roles) {
         userService.userAndRolesFromController(user, roles);
+        return "redirect:/admin";
+    }
+
+    @PutMapping("/updated_user")
+    public String editUser(@ModelAttribute("user") User user,
+                           @RequestParam(value = "roles") List<Long> roles) {
+        userService.userAndRolesFromController(user, roles);
+        return "redirect:/admin";
+    }
+
+    @DeleteMapping("/delete_user/{id}")
+    public String deleteUser(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
         return "redirect:/admin";
     }
 
@@ -66,24 +70,6 @@ public class AdminController {
 //        userService.createOrEditUser(user);
 //        return "redirect:/admin2";
 //    }
-
-    @PutMapping("/updated_user")
-    public String editUser(@ModelAttribute("user") User user,
-                           @RequestParam(value = "roles") List<Long> roles) {
-        if (roles == null) {
-            return "/empty_checkboxes";
-        }
-        userService.userAndRolesFromController(user, roles);
-        return "redirect:/admin";
-    }
-
-    @DeleteMapping("/delete_user/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
-        userService.deleteUser(id);
-        return "redirect:/admin";
-    }
-
-
 
 
 
@@ -129,11 +115,11 @@ public class AdminController {
 //        return "redirect:/admin";
 //    }
 
-    @GetMapping("/make_new_empty")
-    public String emptyUser(@ModelAttribute("user") User user, Model model) {
-        model.addAttribute("roles", roleService.getAllRoles());
-        return "/empty_to_fill_in";
-    }
+//    @GetMapping("/make_new_empty")
+//    public String emptyUser(@ModelAttribute("user") User user, Model model) {
+//        model.addAttribute("roles", roleService.getAllRoles());
+//        return "/empty_to_fill_in";
+//    }
 
 //    @PostMapping("/brand_new_user")
 //    public String newUser(@ModelAttribute("user") User user,
