@@ -1,6 +1,7 @@
 package kata.boot.service;
 
 
+import kata.boot.ExeptionHandler.NoUserWithSuchIdException;
 import kata.boot.entity.Role;
 import kata.boot.entity.User;
 import kata.boot.repository.RoleRepository;
@@ -39,7 +40,8 @@ public class UserServiceImp implements UserService {
     @Override
     @Transactional(readOnly = true)
     public User showUser(Long id) {
-        return userRepository.getById(id);
+        return userRepository.findById(id)
+            .orElseThrow(() -> new NoUserWithSuchIdException("User with such id does not exist"));
     }
 
     @Override

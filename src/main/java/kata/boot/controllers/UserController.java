@@ -26,10 +26,10 @@ public class UserController {
         return "user";
     }
 
-    @PostConstruct
-    public void defaultUsers() {
-        userService.createStartUpUsers();
-    }
+//    @PostConstruct
+//    public void defaultUsers() {
+//        userService.createStartUpUsers();
+//    }
 }
 
 

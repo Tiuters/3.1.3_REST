@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/admin")
 public class AdminController {
     private final UserService userService;
@@ -22,30 +22,69 @@ public class AdminController {
     }
 
     @GetMapping
-    public String showAllUsers(Model model, @AuthenticationPrincipal User user) {
-        model.addAttribute("user", user);
-        model.addAttribute("users", userService.showAllUsers());
-        model.addAttribute("roles", roleService.getAllRoles());
-        return "admin";
+    public List<User> showAllUsers() {
+        return userService.showAllUsers();
+    }
+//  ВАРИАНТ С ResponseEntity
+//    @GetMapping
+//    public ResponseEntity<List<User>> showAllUsers() {
+//        List<User> users = userService.showAllUsers();
+//        return new ResponseEntity<>(users, HttpStatus.OK);
+//    }
+
+    @GetMapping("/{id}")
+    public User getUser (@PathVariable Long id) {
+        return userService.showUser(id);
+    }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<User> apiGetOneUser(@PathVariable("id") long id) {
+//        User user = userService.showUser(id);
+//        return new ResponseEntity<>(user, HttpStatus.OK);
+//    }
+
+    @PostMapping
+    public User newUser(@RequestBody User user) {
+        userService.createOrEditUser(user);
+        return user;
     }
 
-    @PostMapping("/new_user")
-    public String newUser(@ModelAttribute("user") User user,
-                          @RequestParam(value = "roles") List<Long> roles) {
-        userService.userAndRolesFromController(user, roles);
-        return "redirect:/admin";
+    @PutMapping
+    public User editUser(@RequestBody User user) {
+        userService.createOrEditUser(user);
+        return user;
     }
 
-    @PutMapping("/updated_user")
-    public String editUser(@ModelAttribute("user") User user,
-                           @RequestParam(value = "roles") List<Long> roles) {
-        userService.userAndRolesFromController(user, roles);
-        return "redirect:/admin";
-    }
-
-    @DeleteMapping("/delete_user/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable Long id){
         userService.deleteUser(id);
-        return "redirect:/admin";
+        return "User with Id = " + id + "was deleted";
     }
+
+//    @GetMapping
+//    public String showAllUsers(Model model, @AuthenticationPrincipal User user) {
+//        model.addAttribute("user", user);
+//        model.addAttribute("users", userService.showAllUsers());
+//        model.addAttribute("roles", roleService.getAllRoles());
+//        return "admin";
+//    }
+//
+//    @PostMapping("/new_user")
+//    public String newUser(@ModelAttribute("user") User user,
+//                          @RequestParam(value = "roles") List<Long> roles) {
+//        userService.userAndRolesFromController(user, roles);
+//        return "redirect:/admin";
+//    }
+//
+//    @PutMapping("/updated_user")
+//    public String editUser(@ModelAttribute("user") User user,
+//                           @RequestParam(value = "roles") List<Long> roles) {
+//        userService.userAndRolesFromController(user, roles);
+//        return "redirect:/admin";
+//    }
+//
+//    @DeleteMapping("/delete_user/{id}")
+//    public String deleteUser(@PathVariable("id") Long id) {
+//        userService.deleteUser(id);
+//        return "redirect:/admin";
+//    }
 }
