@@ -19,7 +19,7 @@ public class User implements UserDetails {
 
     private String name;
 
-    private String lastName;
+    private String lastname;
 
     private String post;
 
@@ -27,7 +27,7 @@ public class User implements UserDetails {
 
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.EAGER/*, cascade = {CascadeType.PERSIST, CascadeType.MERGE}*/)
     @JoinTable(name = "users_roles",
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -36,9 +36,9 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String name, String lastName, String post, String username, String password) {
+    public User(String name, String lastname, String post, String username, String password) {
         this.name = name;
-        this.lastName = lastName;
+        this.lastname = lastname;
         this.post = post;
         this.username = username;
         this.password = password;
@@ -67,12 +67,12 @@ public class User implements UserDetails {
         this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getPost() {
@@ -148,13 +148,13 @@ StringBuilder sb = new StringBuilder();
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(name, user.name) && Objects.equals(lastName, user.lastName)
+        return Objects.equals(name, user.name) && Objects.equals(lastname, user.lastname)
             && Objects.equals(post, user.post) && Objects.equals(username, user.username)
             && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, lastName, post, username, password);
+        return Objects.hash(name, lastname, post, username, password);
     }
 }

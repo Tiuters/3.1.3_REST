@@ -3,6 +3,8 @@ package kata.boot.controllers;
 import kata.boot.entity.User;
 import kata.boot.service.RoleService;
 import kata.boot.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,15 +34,15 @@ public class AdminController {
 //        return new ResponseEntity<>(users, HttpStatus.OK);
 //    }
 
-    @GetMapping("/{id}")
-    public User getUser (@PathVariable Long id) {
-        return userService.showUser(id);
-    }
 //    @GetMapping("/{id}")
-//    public ResponseEntity<User> apiGetOneUser(@PathVariable("id") long id) {
-//        User user = userService.showUser(id);
-//        return new ResponseEntity<>(user, HttpStatus.OK);
+//    public User getUser (@PathVariable Long id) {
+//        return userService.showUser(id);
 //    }
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUser(@PathVariable("id") Long id) {
+        User user = userService.showUser(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
 
     @PostMapping
     public User newUser(@RequestBody User user) {

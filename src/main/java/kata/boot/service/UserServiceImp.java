@@ -48,6 +48,16 @@ public class UserServiceImp implements UserService {
     public void createOrEditUser(User user) {
         if (user.getId() == null) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
+//            Role role_user = roleRepository.findByRole(
+//                user.getRoles()
+//                    .stream()
+//                    .filter(r -> r.getRole().equals("ROLE_USER"))
+//                    .findFirst()
+//                    .get()
+//                    .getRole());
+//            user.setRoles(Set.of(role_user));
+//
+
             userRepository.save(user);
             return;
         }
@@ -102,6 +112,8 @@ public class UserServiceImp implements UserService {
 
         createOrEditUser(user2);
         user2.addRoleToUser(roleUser);
+
+
     }
 
 
