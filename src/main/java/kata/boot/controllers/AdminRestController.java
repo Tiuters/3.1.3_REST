@@ -13,53 +13,52 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin")
-public class AdminController {
+@RequestMapping("/api")
+public class AdminRestController {
     private final UserService userService;
     private final RoleService roleService;
 
-    public AdminController(UserService userService, RoleService roleService) {
+    public AdminRestController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
 
-    @GetMapping
+    @GetMapping("/get-all-users")
     public List<User> showAllUsers() {
         return userService.showAllUsers();
     }
 //  ВАРИАНТ С ResponseEntity
-//    @GetMapping
+//    @GetMapping("/get-all-users")
 //    public ResponseEntity<List<User>> showAllUsers() {
 //        List<User> users = userService.showAllUsers();
 //        return new ResponseEntity<>(users, HttpStatus.OK);
 //    }
 
-//    @GetMapping("/{id}")
-//    public User getUser (@PathVariable Long id) {
-//        return userService.showUser(id);
-//    }
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable("id") Long id) {
-        User user = userService.showUser(id);
-        return new ResponseEntity<>(user, HttpStatus.OK);
-    }
+    public User getUser (@PathVariable Long id) {
+        return userService.showUser(id);}
+//    @GetMapping("/get-user/{id}")
+//    public ResponseEntity<User> getUser(@PathVariable("id") Long id) {
+//        User user = userService.showUser(id);
+//        return new ResponseEntity<>(user, HttpStatus.OK);
+//    }
 
-    @PostMapping
+    @PostMapping("/new-user")
     public User newUser(@RequestBody User user) {
         userService.createOrEditUser(user);
         return user;
     }
 
-    @PutMapping
+    @PutMapping("/edit-user")
     public User editUser(@RequestBody User user) {
         userService.createOrEditUser(user);
         return user;
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete-user/{id}")
     public String deleteUser(@PathVariable Long id){
         userService.deleteUser(id);
-        return "User with Id = " + id + "was deleted";
+        return "User with Id = " + id + " was deleted";
     }
 
 //    @GetMapping

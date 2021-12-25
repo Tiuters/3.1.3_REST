@@ -21,7 +21,7 @@ public class User implements UserDetails {
 
     private String lastname;
 
-    private String post;
+    private String position;
 
     private String username;
 
@@ -36,10 +36,10 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String name, String lastname, String post, String username, String password) {
+    public User(String name, String lastname, String position, String username, String password) {
         this.name = name;
         this.lastname = lastname;
-        this.post = post;
+        this.position = position;
         this.username = username;
         this.password = password;
     }
@@ -75,12 +75,12 @@ public class User implements UserDetails {
         this.lastname = lastname;
     }
 
-    public String getPost() {
-        return post;
+    public String getPosition() {
+        return position;
     }
 
-    public void setPost(String post) {
-        this.post = post;
+    public void setPosition(String post) {
+        this.position = post;
     }
 
     public void setUsername(String username) {
@@ -148,13 +148,16 @@ StringBuilder sb = new StringBuilder();
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(name, user.name) && Objects.equals(lastname, user.lastname)
-            && Objects.equals(post, user.post) && Objects.equals(username, user.username)
+        return Objects.equals(name, user.name)
+            && Objects.equals(lastname, user.lastname)
+            && Objects.equals(position, user.position)
+            && Objects.equals(username, user.username)
             && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, lastname, post, username, password);
+
+        return Objects.hash(name, lastname, position, username, password);
     }
 }

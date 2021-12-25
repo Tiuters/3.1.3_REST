@@ -33,26 +33,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); // конфигурация для прохождения аутентификации
     }
 
-    //    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//
-//        http
-//            .authorizeRequests()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
-//            .anyRequest().authenticated()
-//                .and()
-//            .formLogin()
-//                .loginPage("/login")
-//                .permitAll()
-//            .successHandler(successUserHandler) // подключаем наш SuccessHandler для перенеправления по ролям
-//                .and()
-//            .logout()
-//                .logoutUrl("/logout")
-//                .logoutSuccessUrl("/login")
-//                .and()
-//            .csrf() .disable();
-//    }
+        @Override
+    protected void configure(HttpSecurity http) throws Exception {
+
+        http
+            .authorizeRequests()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+            .anyRequest().authenticated()
+                .and()
+            .formLogin()
+                .loginPage("/login")
+                .permitAll()
+            .successHandler(successUserHandler) // подключаем наш SuccessHandler для перенеправления по ролям
+                .and()
+            .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+                .and()
+            .csrf() .disable();
+    }
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/**");
