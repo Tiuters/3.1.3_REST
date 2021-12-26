@@ -25,7 +25,8 @@ public class AdminRestController {
 
     @GetMapping("/get-all-users")
     public List<User> showAllUsers() {
-        return userService.showAllUsers();
+        List<User> users = userService.showAllUsers();
+        return users;
     }
 //  ВАРИАНТ С ResponseEntity
 //    @GetMapping("/get-all-users")
@@ -44,7 +45,7 @@ public class AdminRestController {
 //    }
 
     @PostMapping("/new-user")
-    public User newUser(@RequestBody User user) {
+    public User newUser(@RequestBody(required = false) User user) {
         userService.createOrEditUser(user);
         return user;
     }

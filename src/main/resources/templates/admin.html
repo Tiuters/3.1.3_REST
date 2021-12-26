@@ -297,13 +297,22 @@
                                 <h5>Add new user</h5>
                             </div>
                         </div>
+                        <!--
+                        "{
+                            "name" : "Mike",
+                            "lastname" : "y",
+                            "position" : "dgtv",
+                            "username" : "few",
+                            "password" : "ref2e"
+                        }"
+                        -->
 
                         <div class="col-lg-12" style="background-color: white; height: 100%"></div>
 
                         <div class="row justify-content-center align-items-center">
                             <div class="col-md-3 ">
                                 <div class="container text-center">
-<!--                                    <form action="#" th:action="@{admin/new_user}" th:object="${user}" method="POST">-->
+                                    <form id="newUserForm"> <!--data-hidden=true style="display: none"-->
                                         <div class="form-group">
                                             <label for="newName" class=" font-weight-bold">First name</label>
                                             <input type="text" name="name" class="form-control" id="newName"
@@ -332,15 +341,15 @@
                                         <div>
                                             <label for="newRoles" class=" font-weight-bold">Roles:</label>
                                             <select class="form-control custom-select" size="2" id="newRoles"
-                                                    th:name="roles"
+                                                    name="roles"
                                                     multiple="multiple" required>
-                                                <option value="1">ADMIN</option>
-                                                <option value="2">USER</option>
+                                                <option value="ROLE_ADMIN">ADMIN</option>
+                                                <option value="ROLE_USER">USER</option>
                                             </select>
                                         </div>
                                         <br>
                                         <div>
-                                            <button type="submit" class="btn btn-success">Add new user</button>
+                                            <button type="button" class="btn btn-success" id="addNewUserButton">Add new user</button>
                                         </div>
                                     </form>
                                 </div>
