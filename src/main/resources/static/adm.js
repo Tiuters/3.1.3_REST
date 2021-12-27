@@ -6,70 +6,35 @@ $(async function () {
 })
 
 const userFetchService = {
-    head: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json;charset=UTF-8'
-        // 'Referer': null
-    },
+
     findAllUsers: async () => await fetch('api/get-all-users'),
-    // findOneUser: async (id) => await fetch('get-user/${id}'),
+
+    findOneUser: async (id) => await fetch('get-user/${id}'),
+
     addNewUser: async (user) => {
-        // const body = JSON.stringify(user)
+        const body = JSON.stringify(user)
         const response = await fetch('api/new-user', {
-            // method: 'POST',
-            // headers: userFetchService.head,
-            // body: {"name": "Andrew", "lastname": "sha"}
             method: "POST",
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(
-                // user
-                {
-                    "name": "Seva",
-                    "lastname": "S",
-                    "position": "programmer",
-                    "username": "seva",
-                    "password": "seva",
-                    "roles":
-                        [{
-                            "id": 2,
-                            "role": "ROLE_USER"
-                        }]
-                }
-            )
+                'Content-Type': 'application/json'},
+            body: body
         })
+        console.log(response)
         return response
-    }/*,*/
-    // editUser: async (user, id) => await fetch('edit-user/${id}',
+    }
+
+    // ,editUser: async (user, id) => await fetch('edit-user/${id}',
     //     {method: 'PUT', headers: userFetchService.head, body: JSON.stringify(user)}),
+
     // deleteUser: async (id) => await fetch('delete-user/${id}',
     //     {method: 'DELETE', headers: userFetchService.head})
 }
 
-// const userFetchService = {
-//     head: {
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json'
-//         // ,        'Referer': null
-//     },
-//     findAllUsers: async () => await fetch('api/get-all-users'),
-//     // findOneUser: async (id) => await fetch('get-user/${id}'),
-//     addNewUser: async (user) => await fetch('api/new-user',
-//         {method: 'POST',
-//             headers: userFetchService.head,
-//             body: JSON.stringify(user)})/*,*/
-//     // editUser: async (user, id) => await fetch('edit-user/${id}',
-//     //     {method: 'PUT', headers: userFetchService.head, body: JSON.stringify(user)}),
-//     // deleteUser: async (id) => await fetch('delete-user/${id}',
-//     //     {method: 'DELETE', headers: userFetchService.head})
-// }
-
-    // getTableWithUsers();
+    getTableWithUsers();
 
 
-
+// ДОБЫТЬ ТАБЛИЦУ *******************************************************************
 async function getTableWithUsers() {
     let tableBody = $('#mainTableWithUsers');
     tableBody.empty();
@@ -115,7 +80,7 @@ async function getTableWithUsers() {
 
 
 
-// Добавление нового
+// Добавление нового ******************************************************************
 async function addNewUser() {
     $('#addNewUserButton').click(async () =>  {
         let addUserForm = $('#newUserForm')
@@ -124,18 +89,33 @@ async function addNewUser() {
         let position = addUserForm.find('#newPosition').val().trim();
         let username = addUserForm.find('#newUsername').val().trim();
         let password = addUserForm.find('#newPassword').val().trim();
-        let roles = addUserForm.find('#newRoles').val();
+        let rolesFromForm = addUserForm.find('#newRoles').val();
+
+        function getRoles(rolesFromForm) {
+            let roles = [];
+            if (rolesFromForm.indexOf("ROLE_USER") >= 0) {
+                roles.push({"id": 2, "role": "ROLE_USER"});
+            }
+            if (rolesFromForm.indexOf("ROLE_ADMIN") >= 0) {
+                roles.push({"id": 1, "role": "ROLE_ADMIN"});
+            }
+            return roles;
+        }
+
+        let rolesWithId = getRoles(rolesFromForm)
+
         let data = {
             name: name,
             lastname: lastname,
             position: position,
             username: username,
             password: password,
-            roles: roles
+            roles: rolesWithId
         }
+
         const response = await userFetchService.addNewUser(data);
         if (response.ok) {
-            getTableWithUsers();
+            await getTableWithUsers();
             addUserForm.find('#newName').val('');
             addUserForm.find('#newLastname').val('');
             addUserForm.find('#newPosition').val('');
@@ -153,6 +133,8 @@ async function addNewUser() {
         }
     })
 }
+
+// РЕДАКТИРОВАТЬ ЮЗЕРА **********************************************************
 
 
 
