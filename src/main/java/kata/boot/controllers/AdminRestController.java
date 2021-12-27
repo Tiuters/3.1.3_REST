@@ -50,7 +50,7 @@ public class AdminRestController {
         return user;
     }
 
-    @PutMapping("/edit-user")
+    @PutMapping("/edit-user/{id}")
     public User editUser(@RequestBody User user) {
         userService.createOrEditUser(user);
         return user;

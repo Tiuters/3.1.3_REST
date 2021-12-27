@@ -107,7 +107,7 @@
                         </div>
                     </div>
 <!--********MODAL EDIT*******************-->
-                                            <div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal fade" id="someDefaultModal" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -116,67 +116,70 @@
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <form id="editUserForm">
-                                                            <div class="modal-body">
+                                                        <div class="modal-body">
+<!--                                                        <form id="editUserForm">-->
+<!--                                                            <div class="modal-body">-->
 
-                                                                <div class="d-flex justify-content-center">
-                                                                    <div class="form-group text-center">
-                                                                        <label for="id-edit" class="font-weight-bold">ID</label>
-                                                                        <input type="text" class="form-control col-sm-12" id="id-edit" name="id" readonly>
-                                                                    </div>
-                                                                </div>
+<!--                                                                <div class="d-flex justify-content-center">-->
+<!--                                                                    <div class="form-group text-center">-->
+<!--                                                                        <label for="id-edit" class="font-weight-bold">ID</label>-->
+<!--                                                                        <input type="text" class="form-control col-sm-12" id="id-edit" name="id" readonly>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
 
-                                                                <div class="d-flex justify-content-center">
-                                                                    <div class="form-group text-center">
-                                                                        <label for="firstname-edit" class="font-weight-bold">First name</label>
-                                                                        <input type="text" class="form-control col-sm-12" id="firstname-edit" name="name" required>
-                                                                    </div>
-                                                                </div>
+<!--                                                                <div class="d-flex justify-content-center">-->
+<!--                                                                    <div class="form-group text-center">-->
+<!--                                                                        <label for="firstname-edit" class="font-weight-bold">First name</label>-->
+<!--                                                                        <input type="text" class="form-control col-sm-12" id="firstname-edit" name="name" required>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
 
-                                                                <div class="d-flex justify-content-center">
-                                                                    <div class="form-group text-center">
-                                                                        <label for="lastname-edit" class="font-weight-bold">Last name</label>
-                                                                        <input type="text" class="form-control col-sm-12" id="lastname-edit" name="lastName" required>
-                                                                    </div>
-                                                                </div>
+<!--                                                                <div class="d-flex justify-content-center">-->
+<!--                                                                    <div class="form-group text-center">-->
+<!--                                                                        <label for="lastname-edit" class="font-weight-bold">Last name</label>-->
+<!--                                                                        <input type="text" class="form-control col-sm-12" id="lastname-edit" name="lastName" required>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
 
-                                                                <div class="d-flex justify-content-center">
-                                                                    <div class="form-group text-center">
-                                                                        <label for="position-edit" class="font-weight-bold">Post</label>
-                                                                        <input type="text" class="form-control col-sm-12" id="position-edit" name="post" required>
-                                                                    </div>
-                                                                </div>
+<!--                                                                <div class="d-flex justify-content-center">-->
+<!--                                                                    <div class="form-group text-center">-->
+<!--                                                                        <label for="position-edit" class="font-weight-bold">Post</label>-->
+<!--                                                                        <input type="text" class="form-control col-sm-12" id="position-edit" name="post" required>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
 
-                                                                <div class="d-flex justify-content-center">
-                                                                    <div class="form-group text-center">
-                                                                        <label for="username-edit" class="font-weight-bold">Username</label>
-                                                                        <input type="text" class="form-control col-sm-12" id="username-edit" name="username" required>
-                                                                    </div>
-                                                                </div>
+<!--                                                                <div class="d-flex justify-content-center">-->
+<!--                                                                    <div class="form-group text-center">-->
+<!--                                                                        <label for="username-edit" class="font-weight-bold">Username</label>-->
+<!--                                                                        <input type="text" class="form-control col-sm-12" id="username-edit" name="username" required>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
 
-                                                                <div class="d-flex justify-content-center">
-                                                                    <div class="form-group text-center">
-                                                                        <label for="recipient-edit" class="font-weight-bold">Password</label>
-                                                                        <input type="text" class="form-control col-sm-12" id="recipient-edit" name="password" required>
-                                                                    </div>
-                                                                </div>
+<!--                                                                <div class="d-flex justify-content-center">-->
+<!--                                                                    <div class="form-group text-center">-->
+<!--                                                                        <label for="recipient-edit" class="font-weight-bold">Password</label>-->
+<!--                                                                        <input type="text" class="form-control col-sm-12" id="recipient-edit" name="password" required>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
 
-                                                                <div class="d-flex justify-content-center">
-                                                                    <div class="form-group text-center">
-                                                                        <label for="roles-edit" class="font-weight-bold">Roles</label>
-                                                                        <select multiple size="2" class="form-control" id="roles-edit" name="roles" required>
-                                                                            <option value="ROLE_ADMIN">ADMIN</option>
-                                                                            <option value="ROLE_USER" selected="selected">USER</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
+<!--                                                                <div class="d-flex justify-content-center">-->
+<!--                                                                    <div class="form-group text-center">-->
+<!--                                                                        <label for="roles-edit" class="font-weight-bold">Roles</label>-->
+<!--                                                                        <select multiple size="2" class="form-control" id="roles-edit" name="roles" required>-->
+<!--                                                                            <option value="ROLE_ADMIN">ADMIN</option>-->
+<!--                                                                            <option value="ROLE_USER" selected="selected">USER</option>-->
+<!--                                                                        </select>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
 
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary" name="edit" value="edit">Edit</button>
-                                                            </div>
-                                                        </form>
+<!--                                                            </div>-->
+<!--&lt;!&ndash;                                                            здесь был футер&ndash;&gt;-->
+<!--                                                        </form>-->
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                                                            <!-- <button type="submit" class="btn btn-primary" name="edit" value="edit">Edit</button>-->
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
