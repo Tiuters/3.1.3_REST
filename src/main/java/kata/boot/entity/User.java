@@ -27,7 +27,7 @@ public class User implements UserDetails {
 
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER/*, cascade = {CascadeType.PERSIST, CascadeType.MERGE}*/)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -96,13 +96,12 @@ public class User implements UserDetails {
     }
 
     public String getRolesAsString() {
-StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         for (Role role : roles) {
             sb.append(role.getRole().toString()).append(", ");
         }
         return sb.substring(0, sb.length() - 2);
     }
-
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
@@ -157,7 +156,6 @@ StringBuilder sb = new StringBuilder();
 
     @Override
     public int hashCode() {
-
         return Objects.hash(name, lastname, position, username, password);
     }
 }

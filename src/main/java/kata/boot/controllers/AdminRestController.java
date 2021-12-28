@@ -19,11 +19,9 @@ import java.util.List;
 @RequestMapping("/api")
 public class AdminRestController {
     private final UserService userService;
-    private final RoleService roleService;
 
-    public AdminRestController(UserService userService, RoleService roleService) {
+    public AdminRestController(UserService userService) {
         this.userService = userService;
-        this.roleService = roleService;
     }
 
     @GetMapping("/get-all-users")
@@ -31,21 +29,11 @@ public class AdminRestController {
         List<User> users = userService.showAllUsers();
         return users;
     }
-//  ВАРИАНТ С ResponseEntity
-//    @GetMapping("/get-all-users")
-//    public ResponseEntity<List<User>> showAllUsers() {
-//        List<User> users = userService.showAllUsers();
-//        return new ResponseEntity<>(users, HttpStatus.OK);
-//    }
 
     @GetMapping("/{id}")
     public User getUser (@PathVariable Long id) {
         return userService.showUser(id);}
-//    @GetMapping("/get-user/{id}")
-//    public ResponseEntity<User> getUser(@PathVariable("id") Long id) {
-//        User user = userService.showUser(id);
-//        return new ResponseEntity<>(user, HttpStatus.OK);
-//    }
+
 
     @PostMapping("/new-user")
     public User newUser(@RequestBody(required = false) User user) {
@@ -65,11 +53,6 @@ public class AdminRestController {
         return "User with Id = " + id + " was deleted";
     }
 
-//    @GetMapping("/authorized-user")
-//    public User getAuthorizedUser(@AuthenticationPrincipal User user) {
-//        return user;
-//    }
-
     @GetMapping("/authorized-user")
     public User getAuthorizedUser(){
         SecurityContext context = SecurityContextHolder.getContext();
@@ -78,32 +61,26 @@ public class AdminRestController {
         User user = (User) principal;
         return user;
     }
-
-//    @GetMapping
-//    public String showAllUsers(Model model, @AuthenticationPrincipal User user) {
-//        model.addAttribute("user", user);
-//        model.addAttribute("users", userService.showAllUsers());
-//        model.addAttribute("roles", roleService.getAllRoles());
-//        return "admin";
-//    }
-//
-//    @PostMapping("/new_user")
-//    public String newUser(@ModelAttribute("user") User user,
-//                          @RequestParam(value = "roles") List<Long> roles) {
-//        userService.userAndRolesFromController(user, roles);
-//        return "redirect:/admin";
-//    }
-//
-//    @PutMapping("/updated_user")
-//    public String editUser(@ModelAttribute("user") User user,
-//                           @RequestParam(value = "roles") List<Long> roles) {
-//        userService.userAndRolesFromController(user, roles);
-//        return "redirect:/admin";
-//    }
-//
-//    @DeleteMapping("/delete_user/{id}")
-//    public String deleteUser(@PathVariable("id") Long id) {
-//        userService.deleteUser(id);
-//        return "redirect:/admin";
-//    }
 }
+
+
+
+
+
+
+//    @GetMapping("/authorized-user")
+//    public User getAuthorizedUser(@AuthenticationPrincipal User user) {
+//        return user;
+//    }
+
+//    @GetMapping("/get-user/{id}")
+//    public ResponseEntity<User> getUser(@PathVariable("id") Long id) {
+//        User user = userService.showUser(id);
+//        return new ResponseEntity<>(user, HttpStatus.OK);
+//    }
+
+//    @GetMapping("/get-all-users")
+//    public ResponseEntity<List<User>> showAllUsers() {
+//        List<User> users = userService.showAllUsers();
+//        return new ResponseEntity<>(users, HttpStatus.OK);
+//    }

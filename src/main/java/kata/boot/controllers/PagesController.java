@@ -13,7 +13,6 @@ public class PagesController {
         this.userService = userService;
     }
 
-
     @GetMapping("/admin")
     public String mainPage() {
         return "admin";
@@ -29,29 +28,9 @@ public class PagesController {
         return "user";
     }
 
-//    @PostConstruct
-//    public void defaultUsers() {
-//        userService.createStartUpUsers();
-//    }
 
-
-
-
-
-
-//    @GetMapping("/test")
-//    public String Test() {
-//        return "test";
-//    }
-
-//    @GetMapping("/admin2")
-//    public String Ad2() {
-//        return "admin2";
-//    }
-//
-//    @GetMapping("/admin3")
-//    public String Ad3() {
-//        return "admin3";
-//    }
-
+    @PostConstruct
+    public void defaultUsers() {
+        userService.createStartUpUsers();
+    }
 }

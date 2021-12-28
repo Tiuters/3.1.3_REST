@@ -19,14 +19,12 @@ import java.util.Set;
 public class UserServiceImp implements UserService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImp(UserRepository userRepository, RoleRepository roleRepository,
+    public UserServiceImp(UserRepository userRepository,
                           RoleService roleService, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
     }
@@ -48,16 +46,6 @@ public class UserServiceImp implements UserService {
     public void createOrEditUser(User user) {
         if (user.getId() == null) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-//            Role role_user = roleRepository.findByRole(
-//                user.getRoles()
-//                    .stream()
-//                    .filter(r -> r.getRole().equals("ROLE_USER"))
-//                    .findFirst()
-//                    .get()
-//                    .getRole());
-//            user.setRoles(Set.of(role_user));
-//
-
             userRepository.save(user);
             return;
         }
@@ -78,15 +66,6 @@ public class UserServiceImp implements UserService {
         return userRepository.getUserByUsername(username);
     }
 
-    @Override
-    public void userAndRolesFromController(User user, List<Long> roles) {
-       Set<Role> set = new HashSet<>();
-        for (Long id : roles) {
-            set.add(roleService.getRoleById(id));
-        }
-        user.setRoles(set);
-        createOrEditUser(user);
-    }
 
     @Override
     public void createStartUpUsers() {

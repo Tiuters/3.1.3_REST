@@ -13,5 +13,4 @@ public interface UserService {
     void deleteUser(Long id);
     User getUserByName(String username);
     void createStartUpUsers();
-    void userAndRolesFromController(User user, List<Long> roles);
 }
