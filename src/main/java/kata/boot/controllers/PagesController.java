@@ -1,31 +1,57 @@
 package kata.boot.controllers;
 
+import kata.boot.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import javax.annotation.PostConstruct;
 
 @Controller
-@RequestMapping("/admin")
 public class PagesController {
+    private final UserService userService;
 
-    @GetMapping
+    public PagesController(UserService userService) {
+        this.userService = userService;
+    }
+
+
+    @GetMapping("/admin")
     public String mainPage() {
         return "admin";
     }
 
-    @GetMapping("/test")
-    public String Test() {
-        return "test";
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
     }
 
-    @GetMapping("/admin2")
-    public String Ad2() {
-        return "admin2";
+    @GetMapping("/user")
+    public String userPage() {
+        return "user";
     }
 
-    @GetMapping("/admin3")
-    public String Ad3() {
-        return "admin3";
-    }
+//    @PostConstruct
+//    public void defaultUsers() {
+//        userService.createStartUpUsers();
+//    }
+
+
+
+
+
+
+//    @GetMapping("/test")
+//    public String Test() {
+//        return "test";
+//    }
+
+//    @GetMapping("/admin2")
+//    public String Ad2() {
+//        return "admin2";
+//    }
+//
+//    @GetMapping("/admin3")
+//    public String Ad3() {
+//        return "admin3";
+//    }
 
 }

@@ -1,8 +1,9 @@
 $(async function () {
     await getTableWithUsers();
-    // getNewUserForm();
     getDefaultModal();
     addNewUser();
+    header();
+    oneUserData();
 })
 
 // ФЕТЧИ **********************************************************************************
@@ -18,7 +19,8 @@ const userFetchService = {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'},
+                'Content-Type': 'application/json'
+            },
             body: body
         })
         console.log(response)
@@ -29,14 +31,20 @@ const userFetchService = {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'},
-        body: JSON.stringify(user)}),
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    }),
 
     deleteUser: async (id) => await fetch(`api/delete-user/${id}`, {
         method: 'DELETE',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'}})
+            'Content-Type': 'application/json'
+        }
+    }),
+
+    getAuthorizedUser: async () => await fetch('api/authorized-user')
 }
 
 
@@ -86,7 +94,7 @@ async function getTableWithUsers() {
 
 // Добавление нового ******************************************************************
 async function addNewUser() {
-    $('#addNewUserButton').click(async () =>  {
+    $('#addNewUserButton').click(async () => {
         let addUserForm = $('#newUserForm')
         let name = addUserForm.find('#newName').val().trim();
         let lastname = addUserForm.find('#newLastname').val().trim();
@@ -246,7 +254,6 @@ async function editUser(modal, id) {
     $("#editButton").on('click', async () => {
 
 
-
         let id = modal.find("#id-edit").val().trim();
         let name = modal.find("#firstname-edit").val().trim();
         let lastname = modal.find("#lastname-edit").val().trim();
@@ -305,6 +312,50 @@ async function deleteUser(modal, id) {
     let closeButton = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>`
     modal.find('.modal-footer').append(closeButton);
 }
+
+// Инфа в шапку *************************************************************************************
+async function header() {
+    let rawUser = await userFetchService.getAuthorizedUser();
+    let user = rawUser.json();
+    user.then(user => {
+
+        document.getElementById("header-username").innerHTML
+            = user.username;
+
+        let rolesList = document.createElement('ul');
+
+        for (let i = 0; i < user.roles.length; i++) {
+            let role = document.createElement('li');
+            role.textContent = user.roles[i].role + " ";
+            rolesList.appendChild(role);
+        }
+
+        document.getElementById("header-rolesAsString").innerHTML
+            = rolesList.textContent;
+    })
+}
+
+// ОДИН ЮЗЕР *********************************************************************************
+async function oneUserData() {
+    let userBody = $('#userTable');
+    userBody.empty();
+
+    await userFetchService.getAuthorizedUser()
+        .then(res => res.json())
+        .then(user => {
+            let bodyFilling =
+                `$(<tr>
+                        <td>${user.id}</td>
+                        <td>${user.name}</td>
+                        <td>${user.lastname}</td>
+                        <td>${user.position}</td>
+                        <td>${user.username}</td>
+                        <td>${user.roles.map(r => r.role)}</td>
+                    </tr> )`;
+            userBody.append(bodyFilling);
+        })
+}
+
 
 
 

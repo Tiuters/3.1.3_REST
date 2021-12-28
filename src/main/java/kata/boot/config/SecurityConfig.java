@@ -53,10 +53,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
             .csrf() .disable();
     }
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/**");
-    }
+
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring().antMatchers("/**");
+//    }
 
     @Bean
     public static PasswordEncoder passwordEncoder() {

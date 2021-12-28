@@ -61,5 +61,46 @@ addPostForm.addEventListener('submit', (e) => {
         })
 })
 
+async function getTableWithUsers() {
+    let tableBody = $('#mainTableWithUsers');
+    tableBody.empty();
 
+    await userFetchService.findAllUsers()
+        .then(res => res.json())
+        .then(users => {
+            users.forEach(user => {
+                let tableFilling =
+                    `$(<tr>
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.lastname}</td>
+                    <td>${user.position}</td>
+                    <td>${user.username}</td>
+                    <td>${user.roles.map(r => r.role)}</td>
+                    <td>
+                        <button type="button" data-userid="${user.id}" data-action="edit" class="btn btn-info"
+                            data-toggle="modal" data-target="#someDefaultModal">Edit</button>
+                    </td>
+                    <td>
+                        <button type="button" data-userid="${user.id}" data-action="delete" class="btn btn-danger" 
+                            data-toggle="modal" data-target="#someDefaultModal">Delete</button>
+                    </td>
+                </tr> )`;
+                tableBody.append(tableFilling);
+            })
+        })
+
+    $("#mainTableWithUsers").find('button').on('click', (event) => {
+        let defaultModal = $('#someDefaultModal');
+
+        let target = event.target
+        let targetButton = $(target);
+        let buttonUserId = targetButton.attr('data-userid');
+        let buttonAction = targetButton.attr('data-action');
+
+        defaultModal.attr('data-userid', buttonUserId);
+        defaultModal.attr('data-action', buttonAction);
+        defaultModal.modal('show');
+    })
+}
 

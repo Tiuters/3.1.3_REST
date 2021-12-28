@@ -106,7 +106,7 @@
                             </div>
                         </div>
                     </div>
-<!--********MODAL EDIT*******************-->
+<!--********MODAL *******************-->
                                             <div class="modal fade" id="someDefaultModal" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -183,99 +183,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-<!--********MODAL EDIT end*******************-->
-<!--********MODAL DELETE*******************-->
-<!--                                            <div class="modal fade" th:id="${'deleteUser'+ user.id}" tabindex="-1" role="dialog"-->
-<!--                                                 th:aria-labelledby="${'deleteUser'+ user.id}" aria-hidden="true">-->
-<!--                                                <div class="modal-dialog" role="document">-->
-<!--                                                    <div class="modal-content">-->
-<!--                                                        <div class="modal-header">-->
-<!--                                                            <h5 class="modal-title" >Delete user</h5>-->
-<!--                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                                                                <span aria-hidden="true">&times;</span>-->
-<!--                                                            </button>-->
-<!--                                                        </div>-->
-<!--                                                        <form  th:method="DELETE" th:action="@{/admin/delete_user/{id}(id=${user.id})}">-->
-<!--                                                            <div class="modal-body">-->
+<!--********MODAL end*******************-->
 
-<!--                                                                <div class="d-flex justify-content-center">-->
-<!--                                                                    <div class="form-group text-center">-->
-<!--                                                                        <label for="id-del" class="font-weight-bold">ID</label>-->
-<!--                                                                        <input type="text" class="form-control col-sm-12" th:value="*{user.id}" id="id-del" name="id" readonly>-->
-<!--                                                                    </div>-->
-<!--                                                                </div>-->
-
-<!--                                                                <div class="d-flex justify-content-center">-->
-<!--                                                                    <div class="form-group text-center">-->
-<!--                                                                        <label for="firstname-del" class="font-weight-bold">First name</label>-->
-<!--                                                                        <input type="text" class="form-control col-sm-12" id="firstname-del" th:value="*{user.name}" name="name">-->
-<!--                                                                    </div>-->
-<!--                                                                </div>-->
-
-<!--                                                                <div class="d-flex justify-content-center">-->
-<!--                                                                    <div class="form-group text-center">-->
-<!--                                                                        <label for="lastname-del" class="font-weight-bold">Last name</label>-->
-<!--                                                                        <input type="text" class="form-control col-sm-12" id="lastname-del" th:value="*{user.lastName}" name="lastName">-->
-<!--                                                                    </div>-->
-<!--                                                                </div>-->
-
-<!--                                                                <div class="d-flex justify-content-center">-->
-<!--                                                                    <div class="form-group text-center">-->
-<!--                                                                        <label for="post-del" class="font-weight-bold">Post</label>-->
-<!--                                                                        <input type="text" class="form-control col-sm-12" id="post-del" th:value="*{user.post}" name="post">-->
-<!--                                                                    </div>-->
-<!--                                                                </div>-->
-
-<!--                                                                <div class="d-flex justify-content-center">-->
-<!--                                                                    <div class="form-group text-center">-->
-<!--                                                                        <label for="username-del" class="font-weight-bold">Username</label>-->
-<!--                                                                        <input type="text" class="form-control col-sm-12" id="username-del" th:value="*{user.username}" name="username">-->
-<!--                                                                    </div>-->
-<!--                                                                </div>-->
-
-<!--                                                                <div class="d-flex justify-content-center">-->
-<!--                                                                    <div class="form-group text-center">-->
-<!--                                                                        <label for="recipient-del" class="font-weight-bold">Password</label>-->
-<!--                                                                        <input type="text" class="form-control col-sm-12" id="recipient-del" th:value="*{user.password}" name="password">-->
-<!--                                                                    </div>-->
-<!--                                                                </div>-->
-
-<!--                                                                <div class="d-flex justify-content-center">-->
-<!--                                                                    <div class="form-group text-center">-->
-<!--                                                                        <label for="roles-del" class="font-weight-bold">Roles</label>-->
-<!--                                                                        <select multiple size="2" class="form-control" id="roles-del" name="roles">-->
-<!--                                                                            <option-->
-<!--                                                                                    th:each="role : ${roles}"-->
-<!--                                                                                    th:value="${role.getId()}"-->
-<!--                                                                                    th:text="${role.role}">-->
-<!--                                                                            </option>-->
-<!--                                                                        </select>-->
-<!--                                                                    </div>-->
-<!--                                                                </div>-->
-
-<!--                                                            </div>-->
-<!--                                                            <div class="modal-footer">-->
-<!--                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-<!--                                                                <button type="submit" class="btn btn-primary" name="delete" value="delete">Delete</button>-->
-<!--                                                            </div>-->
-<!--                                                        </form>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-
-
-
-
-                                                                                                                                                                                            <!--                                        </tr>-->
-                                                                                                                                                                                            <!--                                    </tbody>-->
-                                                                                                                                                                                            <!--                                </table>-->
-
-                                                                                                                                                                                            <!--                            </div>-->
-                                                                                                                                                                                            <!--                        </div>-->
-                                                                                                                                                                                            <!--                    </div>-->
-                    <!--********MODAL DELETE end*******************-->
-
-                    <!-- *************NEW USER************ -->
+<!-- *************NEW USER************ -->
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
                         <div class="col-lg-12 pt-2 border">
@@ -283,15 +193,6 @@
                                 <h5>Add new user</h5>
                             </div>
                         </div>
-                        <!--
-                        "{
-                            "name" : "Mike",
-                            "lastname" : "y",
-                            "position" : "dgtv",
-                            "username" : "few",
-                            "password" : "ref2e"
-                        }"
-                        -->
 
                         <div class="col-lg-12" style="background-color: white; height: 100%"></div>
 

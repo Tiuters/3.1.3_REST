@@ -5,7 +5,10 @@ import kata.boot.service.RoleService;
 import kata.boot.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -60,6 +63,20 @@ public class AdminRestController {
     public String deleteUser(@PathVariable Long id){
         userService.deleteUser(id);
         return "User with Id = " + id + " was deleted";
+    }
+
+//    @GetMapping("/authorized-user")
+//    public User getAuthorizedUser(@AuthenticationPrincipal User user) {
+//        return user;
+//    }
+
+    @GetMapping("/authorized-user")
+    public User getAuthorizedUser(){
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+        Object principal = authentication.getPrincipal();
+        User user = (User) principal;
+        return user;
     }
 
 //    @GetMapping

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.PostConstruct;
 
 @Controller
-@RequestMapping("/user")
+//@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
@@ -20,11 +20,11 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public String show(Model model, @AuthenticationPrincipal User user) {
-        model.addAttribute("user", user);
-        return "user";
-    }
+//    @GetMapping
+//    public String show(Model model, @AuthenticationPrincipal User user) {
+//        model.addAttribute("user", user);
+//        return "user";
+//    }
 
 //    @PostConstruct
 //    public void defaultUsers() {
