@@ -1,5 +1,6 @@
 package kata.boot.controllers;
 
+import kata.boot.entity.Role;
 import kata.boot.entity.User;
 import kata.boot.service.RoleService;
 import kata.boot.service.UserService;
@@ -19,9 +20,11 @@ import java.util.List;
 @RequestMapping("/api")
 public class AdminRestController {
     private final UserService userService;
+    private final RoleService roleService;
 
-    public AdminRestController(UserService userService) {
+    public AdminRestController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping("/get-all-users")
@@ -60,6 +63,12 @@ public class AdminRestController {
         Object principal = authentication.getPrincipal();
         User user = (User) principal;
         return user;
+    }
+
+    @GetMapping("/get-all-roles")
+    public List<Role> showAllRoles() {
+        List<Role> allRoles = roleService.getAllRoles();
+        return allRoles;
     }
 }
 

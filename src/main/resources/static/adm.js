@@ -44,7 +44,9 @@ const userFetchService = {
         }
     }),
 
-    getAuthorizedUser: async () => await fetch('api/authorized-user')
+    getAuthorizedUser: async () => await fetch('api/authorized-user'),
+
+    getAllRoles: async () => await fetch('api/get-all-roles')
 }
 
 
@@ -94,6 +96,17 @@ async function getTableWithUsers() {
 
 // Добавление нового ******************************************************************
 async function addNewUser() {
+
+    let fetchedRoles = await userFetchService.getAllRoles();
+    let rolesD = await fetchedRoles.json();
+    let list = document.querySelector('.alll')
+    let key;
+    for (key in rolesD){
+        list.innerHTML += `
+          <option value="${rolesD[key].role}">${rolesD[key].role}</option>
+        `
+    }
+
     $('#addNewUserButton').click(async () => {
         let addUserForm = $('#newUserForm')
         let name = addUserForm.find('#newName').val().trim();
