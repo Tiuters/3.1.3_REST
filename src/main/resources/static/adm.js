@@ -194,6 +194,8 @@ async function editUser(modal, id) {
     let preuser = await userFetchService.findOneUser(id);
     let user = preuser.json();
 
+
+
     modal.find('.modal-title').html('Edit user');
 
     let editButton = `<button  class="btn btn-outline-success" id="editButton">Edit</button>`;
@@ -251,9 +253,10 @@ async function editUser(modal, id) {
                     <div class="d-flex justify-content-center">
                         <div class="form-group text-center">
                             <label for="roles-edit" class="font-weight-bold">Roles</label>
-                            <select multiple size="2" class="form-control" id="roles-edit" name="roles" required>
-                                <option value="ROLE_ADMIN">ADMIN</option>
-                                <option value="ROLE_USER" selected="selected">USER</option>
+<!--                            <select multiple size="2" class="form-control" id="roles-edit" name="roles" required>-->
+                            <select multiple class="all-roles-edit" id="roles-edit" name="roles" required>
+<!--                                <option value="ROLE_ADMIN">ADMIN</option>-->
+<!--                                <option value="ROLE_USER" selected="selected">USER</option>-->
                             </select>
                         </div>
                     </div>
@@ -263,6 +266,16 @@ async function editUser(modal, id) {
         `;
         modal.find('.modal-body').append(bodyForm);
     })
+
+    let fetchedRoles = await userFetchService.getAllRoles();
+    let rolesD = await fetchedRoles.json();
+    let list = document.querySelector('.all-roles-edit')
+    let key;
+    for (key in rolesD){
+        list.innerHTML += `
+          <option value="${rolesD[key].role}">${rolesD[key].role}</option>
+        `
+    }
 
     $("#editButton").on('click', async () => {
 
