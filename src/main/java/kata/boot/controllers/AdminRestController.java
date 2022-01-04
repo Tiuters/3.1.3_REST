@@ -4,14 +4,9 @@ import kata.boot.entity.Role;
 import kata.boot.entity.User;
 import kata.boot.service.RoleService;
 import kata.boot.service.UserService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,13 +35,13 @@ public class AdminRestController {
 
     @PostMapping("/new-user")
     public User newUser(@RequestBody(required = false) User user) {
-        userService.createOrEditUser(user);
+        userService.addRoleId(user);
         return user;
     }
 
     @PutMapping("/edit-user/{id}")
     public User editUser(@RequestBody User user) {
-        userService.createOrEditUser(user);
+        userService.addRoleId(user);
         return user;
     }
 

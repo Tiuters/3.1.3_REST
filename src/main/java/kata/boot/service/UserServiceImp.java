@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -53,6 +55,21 @@ public class UserServiceImp implements UserService {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
         userRepository.save(user);
+    }
+
+    public void addRoleId(User user) {
+        Set<Role> roles = user.getRoles();
+        List<Role> allRoles = roleService.getAllRoles();
+
+        for (Role r : allRoles) {
+            for (Role ru : roles){
+                if (r.getRole().equals(ru.getRole())){
+                    ru.setId(r.getId());
+                }
+            }
+        }
+
+        createOrEditUser(user);
     }
 
     @Override

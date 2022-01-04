@@ -116,18 +116,18 @@ async function addNewUser() {
         let password = addUserForm.find('#newPassword').val().trim();
         let rolesFromForm = addUserForm.find('#newRoles').val();
 
-        function getRoles(rolesFromForm) {
-            let roles = [];
-            if (rolesFromForm.indexOf("ROLE_USER") >= 0) {
-                roles.push({"id": 2, "role": "ROLE_USER"});
-            }
-            if (rolesFromForm.indexOf("ROLE_ADMIN") >= 0) {
-                roles.push({"id": 1, "role": "ROLE_ADMIN"});
-            }
-            return roles;
-        }
-
-        let rolesWithId = getRoles(rolesFromForm)
+        // function getRoles(rolesFromForm) {
+        //     let roles = [];
+        //     if (rolesFromForm.indexOf("ROLE_USER") >= 0) {
+        //         roles.push({"id": 2, "role": "ROLE_USER"});
+        //     }
+        //     if (rolesFromForm.indexOf("ROLE_ADMIN") >= 0) {
+        //         roles.push({"id": 1, "role": "ROLE_ADMIN"});
+        //     }
+        //     return roles;
+        // }
+        //
+        // let rolesWithId = getRoles(rolesFromForm)
 
         let data = {
             name: name,
@@ -135,7 +135,7 @@ async function addNewUser() {
             position: position,
             username: username,
             password: password,
-            roles: rolesWithId
+            roles: rolesFromForm/*rolesWithId*/
         }
 
         const response = await userFetchService.addNewUser(data);
@@ -254,7 +254,7 @@ async function editUser(modal, id) {
                         <div class="form-group text-center">
                             <label for="roles-edit" class="font-weight-bold">Roles</label>
 <!--                            <select multiple size="2" class="form-control" id="roles-edit" name="roles" required>-->
-                            <select multiple class="all-roles-edit" id="roles-edit" name="roles" required>
+                            <select class="all-roles-edit" id="roles-edit" name="roles" multiple required>
 <!--                                <option value="ROLE_ADMIN">ADMIN</option>-->
 <!--                                <option value="ROLE_USER" selected="selected">USER</option>-->
                             </select>
@@ -288,18 +288,18 @@ async function editUser(modal, id) {
         let password = modal.find("#password-edit").val().trim();
         let rolesFromForm = modal.find("#roles-edit").val();
 
-        function getRoles(rolesFromForm) {
-            let roles = [];
-            if (rolesFromForm.indexOf("ROLE_USER") >= 0) {
-                roles.push({"id": 2, "role": "ROLE_USER"});
-            }
-            if (rolesFromForm.indexOf("ROLE_ADMIN") >= 0) {
-                roles.push({"id": 1, "role": "ROLE_ADMIN"});
-            }
-            return roles;
-        }
-
-        let rolesWithId = getRoles(rolesFromForm)
+        // function getRoles(rolesFromForm) {
+        //     let roles = [];
+        //     if (rolesFromForm.indexOf("ROLE_USER") >= 0) {
+        //         roles.push({"id": 2, "role": "ROLE_USER"});
+        //     }
+        //     if (rolesFromForm.indexOf("ROLE_ADMIN") >= 0) {
+        //         roles.push({"id": 1, "role": "ROLE_ADMIN"});
+        //     }
+        //     return roles;
+        // }
+        //
+        // let rolesWithId = getRoles(rolesFromForm)
 
         let data = {
             id: id,
@@ -308,7 +308,7 @@ async function editUser(modal, id) {
             position: position,
             username: username,
             password: password,
-            roles: rolesWithId
+            roles: rolesFromForm/*rolesWithId*/
         }
 
         const response = await userFetchService.editUser(data, id);

@@ -43,5 +43,9 @@ public class RoleServiceImp implements RoleService{
         }
         return set;
     }
+    @Override
+    public Role getRoleByName(String name) {
+        return roleRepository.findByRole(name);
+    }
 
 }

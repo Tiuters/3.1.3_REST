@@ -11,4 +11,5 @@ public interface RoleService {
     List<Role> getAllRoles();
     Role getRoleById(Long id);
     Set<Role> stringToSet(String[] role);
+    Role getRoleByName(String name);
 }
